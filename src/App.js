@@ -8,24 +8,6 @@ import Movie from './Movie';
 // 그걸 각각 컴포넌트에 props를 이용해 정보를 출력 !
 // big component => data -> children component [props]
 
-const movies = [
-  {
-    title:"Matrix",
-    poster: "https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/The_Matrix_soundtrack_cover.jpg/220px-The_Matrix_soundtrack_cover.jpg"
-  },
-  {
-    title: "Full Metal Jacket",
-    poster: "https://cdn.shopify.com/s/files/1/0784/1125/products/Full_Metal_Jacket_2048x.jpg?v=1530145558"
-  },
-  {
-    title: "Oldboy",
-    poster: "https://upload.wikimedia.org/wikipedia/en/thumb/6/67/Oldboykoreanposter.jpg/220px-Oldboykoreanposter.jpg"
-  },
-  {
-    title: "Star Wars",
-    poster: "https://m.media-amazon.com/images/M/MV5BNzVlY2MwMjktM2E4OS00Y2Y3LWE3ZjctYzhkZGM3YzA1ZWM2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg"
-  }
-]
 
 class App extends Component {
 
@@ -48,13 +30,59 @@ class App extends Component {
     
   // }
 
+  // state가 바뀔때 마다 , 컴포넌트는 다시 render 한다.
+  // 새로운 state와 함께
+  state = {
+  }
+
+  //컴포넌트가 mount하면 , 페이지 로드 후 1초후에, 00 작업(새로운 영화)이 보여진다.
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        movies: [
+          {
+            title:"Matrix",
+            poster: "https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/The_Matrix_soundtrack_cover.jpg/220px-The_Matrix_soundtrack_cover.jpg"
+          },
+          {
+            title: "Full Metal Jacket",
+            poster: "https://cdn.shopify.com/s/files/1/0784/1125/products/Full_Metal_Jacket_2048x.jpg?v=1530145558"
+          },
+          {
+            title: "Oldboy",
+            poster: "https://upload.wikimedia.org/wikipedia/en/thumb/6/67/Oldboykoreanposter.jpg/220px-Oldboykoreanposter.jpg"
+          },
+          {
+            title: "Star Wars",
+            poster: "https://m.media-amazon.com/images/M/MV5BNzVlY2MwMjktM2E4OS00Y2Y3LWE3ZjctYzhkZGM3YzA1ZWM2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg"
+          },
+          {
+            title: "Star Wars2",
+            poster: "https://m.media-amazon.com/images/M/MV5BNzVlY2MwMjktM2E4OS00Y2Y3LWE3ZjctYzhkZGM3YzA1ZWM2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg"
+          }
+        ]
+          // // 이전 영화 리스틀르 두고, 영화 한개를 추가하기 위해 아래와 같이 작성
+          // ...this.state.movies,
+          // {
+          //   title: "Star Wars2",
+          //   poster: "https://m.media-amazon.com/images/M/MV5BNzVlY2MwMjktM2E4OS00Y2Y3LWE3ZjctYzhkZGM3YzA1ZWM2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg"
+          // }
+      })
+    }, 5000)
+  }
+
+  // _ 를 앞에 작성한 이유는 리액트의 기능이 많아서 차별하기 위해
+  _renderMovies = () => {
+    const movies = this.state.movies.map((movie, index) => {
+      return <Movie title={movie.title} poster={movie.poster} key={index} />
+    })
+    return movies
+  }
+
   render() {
-    
     return (
        <div className="App">
-         {movies.map((movie, index) => {
-           return <Movie title={movie.title} poster={movie.poster} key={index} />
-         })}
+         {this.state.movies ? this._renderMovies() : 'Loading'}
        </div>
     );
   }
