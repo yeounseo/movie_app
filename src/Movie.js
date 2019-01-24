@@ -38,6 +38,7 @@ import './Movie.css';
 
 // functional component를 이용하는 경우는 return 만 있으면 된다.
 // 하지만 state는 잃게 된다. 
+// 업데이트가 필요한 부분에서는 state가 필요하기 때문에 functional              component는 사용하지 않지만 , 지금 movie poster와 같은 부분은 사용해도       무관하다.
 function Movie({title, poster}){
     return (
         <div>
@@ -53,13 +54,13 @@ function MoviePoster({poster}){
     )
 }
 
-Movie.PropTypes = {
+Movie.propTypes = {
     title:  PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired
 }
 
-MoviePoster.PropTypes = {
+MoviePoster.propTypes = {
     poster: PropTypes.string.isRequired
 }
 
-export default Movie
+export default Movie;
