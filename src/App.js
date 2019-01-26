@@ -21,13 +21,13 @@ class App extends Component {
   // ex) 영화 앱에서는 WillMount할때 API를 불러오자
   // componentWillMount(){
   //   console.log("componentWillMount");
-    
+
   // }
 
   // // ex) 성공적으로 컴포넌트가 자리 잡았음
   // componentDidMount(){
   //   console.log("componentDidMount");
-    
+
   // }
 
   // state가 바뀔때 마다 , 컴포넌트는 다시 render 한다.
@@ -37,7 +37,7 @@ class App extends Component {
   //컴포넌트가 mount하면 , 페이지 로드 후 1초후에, 00 작업(새로운 영화)이 보여진다.
   componentDidMount() {
     this._getMovies();
-    
+
     // setTimeout(() => {
     //   this.setState({
     //     movies: [
@@ -75,14 +75,19 @@ class App extends Component {
   // _ 를 앞에 작성한 이유는 리액트의 기능이 많아서 차별하기 위해
   _renderMovies = () => {
     const movies = this.state.movies.map((movie) => {
-      return <Movie title={movie.title} poster={movie.large_cover_image} key={movie.id} />
+      return <Movie
+        title={movie.title_english}
+        poster={movie.small_cover_image}
+        key={movie.id}
+        genres={movie.genres}
+        synopsis={movie.synopsis}
+      />
     })
     return movies
   }
 
-
   //  async , await  ->  동기적으로 await한 _callApi()가 작동한 후에 실행되도록 작성한 코드이다.
-  _getMovies = async() => {
+  _getMovies = async () => {
     const movies = await this._callApi()
     this.setState({
       movies
@@ -91,17 +96,17 @@ class App extends Component {
 
   _callApi = () => {
     return fetch('https://yts.am/api/v2/list_movies.json?sort_by=rating')
-    // fetch를 ajax를 불러올수 있다. 손쉽게
-    .then(response => response.json())
-    .then(json =>  json.data.movies)
-    .catch(err => console.log(err))
+      // fetch를 ajax를 불러올수 있다. 손쉽게
+      .then(response => response.json())
+      .then(json => json.data.movies)
+      .catch(err => console.log(err))
   }
 
   render() {
     return (
-       <div className="App">
-         {this.state.movies ? this._renderMovies() : 'Loading'}
-       </div>
+      <div className="App">
+        {this.state.movies ? this._renderMovies() : 'Loading'}
+      </div>
     );
   }
 }

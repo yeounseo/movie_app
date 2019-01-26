@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './Movie.css';
 
 // class Movie extends Component {
-    
+
 //     //아래의 porpsTypes를 이용해 부모 컴포넌트가 얻는 정보의 종류가
 //     // 무엇인지 , 있는지 없는지 알수 있다!
 //     static propsTypes = {
@@ -39,28 +39,51 @@ import './Movie.css';
 // functional component를 이용하는 경우는 return 만 있으면 된다.
 // 하지만 state는 잃게 된다. 
 // 업데이트가 필요한 부분에서는 state가 필요하기 때문에 functional              component는 사용하지 않지만 , 지금 movie poster와 같은 부분은 사용해도       무관하다.
-function Movie({title, poster}){
+function Movie({ title, poster, genres, synopsis }) {
     return (
-        <div>
-            <MoviePoster poster={poster}/>
-            <h1>{title}</h1>
+        <div className="Movie">
+            <div className="Movie__Columns">
+                <MoviePoster poster={poster} alt={title} />
+            </div>
+            <div className="Movie__Columns">
+                <h1>{title}</h1>
+                <div className="Movie__Gernes">
+                    {genres.map((genre, index) => <MovieGenre genre={genre} key={index} />)}
+                </div>
+                <p className="Movie__Synopsis">
+                    {synopsis}
+                </p>
+            </div>
         </div>
     )
 }
 
-function MoviePoster({poster}){
+function MoviePoster({ poster, alt }) {
     return (
-        <img src={poster} alt="Movie Poster" />
+        <img src={poster} alt={alt} title={title} className="Movie__Poster" />
+    )
+}
+
+function MovieGerne({ genre }) {
+    return (
+        <span className="Movie__Genre">{genre}</span>
     )
 }
 
 Movie.propTypes = {
-    title:  PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    genres: PropTypes.string.isRequired,
+    synopsis: PropTypes.string.isRequired
 }
 
 MoviePoster.propTypes = {
-    poster: PropTypes.string.isRequired
+    poster: PropTypes.string.isRequired,
+    alt: PropTypes.string.isRequired
+}
+
+MovieGernes.propTypes = {
+    genre: PropTypes.string.isRequired
 }
 
 export default Movie;
