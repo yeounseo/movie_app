@@ -4,11 +4,21 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
+<<<<<<< HEAD
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
+=======
+  background-color: #EFF3F7;
+  height: 100%;
+  
+>>>>>>> 94f1639704547e4844a9c83e310459f06c5ba18a
 }
 
 html, #root {
   height: 100%;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 94f1639704547e4844a9c83e310459f06c5ba18a

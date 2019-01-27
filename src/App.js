@@ -77,7 +77,7 @@ class App extends Component {
     const movies = this.state.movies.map((movie) => {
       return <Movie
         title={movie.title_english}
-        poster={movie.small_cover_image}
+        poster={movie.large_cover_image}
         key={movie.id}
         genres={movie.genres}
         synopsis={movie.synopsis}
@@ -95,7 +95,7 @@ class App extends Component {
   }
 
   _callApi = () => {
-    return fetch('https://yts.am/api/v2/list_movies.json?sort_by=rating')
+    return fetch('https://yts.am/api/v2/list_movies.json?sort_by=download count')
       // fetch를 ajax를 불러올수 있다. 손쉽게
       .then(response => response.json())
       .then(json => json.data.movies)
@@ -103,8 +103,9 @@ class App extends Component {
   }
 
   render() {
+    const { movies } = this.state;
     return (
-      <div className="App">
+      <div className={ movies ? "App" : "App--loading"}>
         {this.state.movies ? this._renderMovies() : 'Loading'}
       </div>
     );

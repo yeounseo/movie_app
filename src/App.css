@@ -4,6 +4,16 @@
   justify-content: space-around;
   flex-wrap: wrap;
   font-size: 14px;
+<<<<<<< HEAD
+=======
+}
+
+.App--loading {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  height: 100%;
+>>>>>>> 94f1639704547e4844a9c83e310459f06c5ba18a
 }
 
 .App--loading {
