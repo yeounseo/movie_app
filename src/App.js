@@ -95,7 +95,7 @@ class App extends Component {
   }
 
   _callApi = () => {
-    return fetch('https://yts.am/api/v2/list_movies.json?sort_by=download count')
+    return fetch('https://yts.am/api/v2/list_movies.json?sort_by=like_count')
       // fetch를 ajax를 불러올수 있다. 손쉽게
       .then(response => response.json())
       .then(json => json.data.movies)
